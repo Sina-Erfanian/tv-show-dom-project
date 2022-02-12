@@ -2,4 +2,57 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Zen Kaku Gothic Antique", sans-serif;
 }
+.logo {
+  width: 200px;
+  height: 60px;
+}
+body{
+  background-color: #120000;
+}
+.navbar-custom {
+  min-height: 70px;
+  padding: 0 40px;
+  background-color: rgb(19, 18, 18);
+}
+.w-search,
+.w-select {
+  align-self: center;
+}
+.w-select select {
+  font-size: 16px;
+}
+
+.w-search input {
+  border: 1px solid rgb(19, 18, 18);
+  outline: none;
+  border: none;
+  padding: 5px 40px;
+  border-radius: 30px;
+}
+.icon {
+  position: absolute;
+  font-size: 20px;
+  top: 7px;
+  left: 7px;
+}
+
+#main {
+  height: 100vh;
+  background-image: url(../images/slide_1.png);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+img{
+  width: 100%;
+  height: 150px;
+}
+.card{
+  flex-basis: 45%;
+}
+
+
