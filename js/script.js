@@ -2,7 +2,7 @@ let getEle = document.querySelector("#selectOption");
 let main = document.querySelector("#main");
 let innerMain = document.querySelector("#innerMain");
 
-function addContent(name, image, summary, number, season) {
+function addContent(name, image, summary, number, season, imdb) {
   let createWrapperDiv = document.createElement("div");
   createWrapperDiv.className = "card";
   main.append(createWrapperDiv);
@@ -21,6 +21,11 @@ function addContent(name, image, summary, number, season) {
   let SeasonAndNumber = document.createElement("p");
   SeasonAndNumber.innerHTML = `Season ${season} - Episode ${number}`;
   createWrapperDiv.append(SeasonAndNumber);
+  let creaatespan = document.createElement("i");
+  creaatespan.innerHTML = `Rate on IMDB ${imdb}`;
+  creaatespan.className = "fa fa-imdb";
+  creaatespan.classList.add("imdb");
+  createWrapperDiv.append(creaatespan);
   return createWrapperDiv;
 }
 
@@ -32,12 +37,14 @@ async function getApi() {
 }
 getApi().then((data) => {
   for (let datas of data) {
+    console.log(datas);
     let name = datas.name;
     let image = datas.image.medium;
     let summary = datas.summary;
     let season = datas.season;
     let number = datas.number;
-    addContent(name, image, summary, season, number);
+    let imdb = datas.rating.average;
+    addContent(name, image, summary, season, number, imdb);
   }
 });
 
@@ -73,7 +80,8 @@ getEle.addEventListener("change", () => {
         let summary = datas.summary;
         let season = datas.season;
         let number = datas.number;
-        addContent(name, image, summary, season, number);
+        let imdb = datas.rating.average;
+        addContent(name, image, summary, season, number, imdb);
       }
     }
   });
@@ -104,7 +112,8 @@ getSearch.addEventListener("keyup", (ev) => {
       let summary = element.summary;
       let season = element.season;
       let number = element.number;
-      addContent(name, image, summary, season, number);
+      let imdb = element.rating.average;
+      addContent(name, image, summary, season, number, imdb);
     });
     getTitle.innerHTML = `<span class="all-episode">${counter} Episode found</span>`;
   });
