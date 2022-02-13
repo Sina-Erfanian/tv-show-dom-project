@@ -44,7 +44,7 @@ getApi().then((data) => {
     let season = datas.season;
     let number = datas.number;
     let imdb = datas.rating.average;
-    addContent(name, image, summary, season, number, imdb);
+    addContent(name, image, summary,number, season, imdb);
   }
 });
 
@@ -81,7 +81,7 @@ getEle.addEventListener("change", () => {
         let season = datas.season;
         let number = datas.number;
         let imdb = datas.rating.average;
-        addContent(name, image, summary, season, number, imdb);
+        addContent(name, image, summary,number, season, imdb);
       }
     }
   });
@@ -113,7 +113,7 @@ getSearch.addEventListener("keyup", (ev) => {
       let season = element.season;
       let number = element.number;
       let imdb = element.rating.average;
-      addContent(name, image, summary, season, number, imdb);
+      addContent(name, image, summary, number,season, imdb);
     });
     getTitle.innerHTML = `<span class="all-episode">${counter} Episode found</span>`;
   });
