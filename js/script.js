@@ -9,17 +9,17 @@ function addContent(name, image, summary, number, season) {
 
   let createImg = document.createElement("img");
   createImg.src = image;
-  createImg.className = "card-img-top";
   createWrapperDiv.append(createImg);
   let createName = document.createElement("h3");
-  createName.className = "card-title";
+  createName.className = "title-card";
   createName.innerHTML = name;
   createWrapperDiv.append(createName);
   let createDivEle = document.createElement("div");
+  createDivEle.className = "sumarry-card";
   createDivEle.innerHTML = summary;
   createWrapperDiv.append(createDivEle);
   let SeasonAndNumber = document.createElement("p");
-  SeasonAndNumber.innerHTML = `S0${season} - E0${number}`;
+  SeasonAndNumber.innerHTML = `Season ${season} - Episode ${number}`;
   createWrapperDiv.append(SeasonAndNumber);
   return createWrapperDiv;
 }
@@ -35,8 +35,8 @@ getApi().then((data) => {
     let name = datas.name;
     let image = datas.image.medium;
     let summary = datas.summary;
-    let season = `S${datas.season} - E${datas.number}`;
-    let number = `S${datas.season} - E${datas.number}`;
+    let season = datas.season;
+    let number = datas.number;
     addContent(name, image, summary, season, number);
   }
 });
@@ -55,7 +55,9 @@ getApi().then((data) => {
     getEle.append(createOption);
   }
 });
+let getTitle = document.querySelector(".title-all");
 getEle.addEventListener("change", () => {
+  getTitle.innerHTML = "";
   main.innerHTML = "";
   async function getApi() {
     const fetchApi = await fetch(
@@ -69,8 +71,8 @@ getEle.addEventListener("change", () => {
         let name = datas.name;
         let image = datas.image.medium;
         let summary = datas.summary;
-        let season = `S${datas.season} - E${datas.number}`;
-        let number = ``;
+        let season = datas.season;
+        let number = datas.number;
         addContent(name, image, summary, season, number);
       }
     }
@@ -78,32 +80,32 @@ getEle.addEventListener("change", () => {
 });
 
 let getSearch = document.getElementById("searchBox");
-let search_term = "";
 
-getSearch.addEventListener("input", (event) => {
-  search_term = event.target.value.toLowerCase();
-  showList();
-});
-const showList = () => {
+getSearch.addEventListener("keyup", (ev) => {
+  getTitle.innerHTML = "";
   main.innerHTML = "";
-};
-
-async function filter() {
-  const fetchApi = await fetch(
-    "https://api.tvmaze.com/shows/216/episodes"
-  ).then((data) => data.json());
-  return fetchApi;
-}
-filter().then((data) => {
-  data
-    .filter((item) => {
-      return (
-        item.name.toLowerCase().includes(search_term)
-      );
-    })
-    .forEach((e) => {
-      const li = document.createElement("li");
-      li.innerHTML = `<i>Name:</i> ${e.name}`
-      main.appendChild(li);
+  let getValue = ev.target.value;
+  async function getApi() {
+    const fetchApi = await fetch(
+      "https://api.tvmaze.com/shows/216/episodes"
+    ).then((data) => data.json());
+    return fetchApi;
+  }
+  getApi().then((data) => {
+    let getData = data.filter((ele) => {
+      let lowercase = ele.name.toLowerCase();
+      return lowercase.includes(getValue);
     });
+    let counter = 0;
+    getData.forEach((element) => {
+      counter++;
+      let name = element.name;
+      let image = element.image.medium;
+      let summary = element.summary;
+      let season = element.season;
+      let number = element.number;
+      addContent(name, image, summary, season, number);
+    });
+    getTitle.innerHTML = `<span class="all-episode">${counter} Episode found</span>`;
+  });
 });
