@@ -57,7 +57,7 @@ async function getApi() {
 getApi().then((data) => {
   for (let datas of data) {
     let createOption = document.createElement("option");
-    createOption.innerHTML = `S0${datas.season} - E${datas.number}`;
+    createOption.innerHTML = `S0${datas.season} - E${datas.number} - ${datas.name}`;
     createOption.value = datas.id;
     getEle.append(createOption);
   }
