@@ -24,20 +24,24 @@
     <title>tv-show</title>
   </head>
   <body>
-    <nav class="d-flex justify-content-between navbar-custom">
-      <div class="d-none d-md-block">
-        <a href=""><img class="logo" src="images/logo.png" alt="logo" /></a>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="d-flex justify-content-between navbar-custom">
+          <div class="d-none d-md-block">
+            <a href=""><img class="logo" src="images/logo.png" alt="logo" /></a>
+          </div>
+          <div class="w-select">
+            <select class="form-select" id="selectOption">
+              <option selected disabled>Open this select menu</option>
+            </select>
+          </div>
+          <div class="w-search position-relative">
+            <ion-icon name="search-outline" class="icon"></ion-icon>
+            <input type="search" placeholder="Search ..." id="searchBox" />
+          </div>
+        </nav>
       </div>
-      <div class="w-select">
-        <select class="form-select" id="selectOption">
-          <option selected disabled>Open this select menu</option>
-        </select>
-      </div>
-      <div class="w-search position-relative">
-        <ion-icon name="search-outline" class="icon"></ion-icon>
-        <input type="search" placeholder="Search ..." id="searchBox" />
-      </div>
-    </nav>
+    </div>
     <header></header>
     <div class="title-all"><span class="all-episode">All Episode</span></div>
     <main id="main"></main>
